@@ -1,0 +1,6 @@
+C:\Users\Елизавета\OneDrive\Рабочий стол\appKUR\kursach\TestKursach\bin\Debug\net6.0-windows\CoverletSourceRootsMapping
+C:\Users\Елизавета\OneDrive\Рабочий стол\appKUR\kursach\TestKursach\obj\Debug\net6.0-windows\TestKursach.csproj.AssemblyReference.cache
+C:\Users\Елизавета\OneDrive\Рабочий стол\appKUR\kursach\TestKursach\obj\Debug\net6.0-windows\TestKursach.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Елизавета\OneDrive\Рабочий стол\appKUR\kursach\TestKursach\obj\Debug\net6.0-windows\TestKursach.AssemblyInfoInputs.cache
+C:\Users\Елизавета\OneDrive\Рабочий стол\appKUR\kursach\TestKursach\obj\Debug\net6.0-windows\TestKursach.AssemblyInfo.cs
+C:\Users\Елизавета\OneDrive\Рабочий стол\appKUR\kursach\TestKursach\obj\Debug\net6.0-windows\TestKursach.csproj.CoreCompileInputs.cache

@@ -1,0 +1,60 @@
+﻿<Window x:Class="kursach.View.WarehouseMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesignIcons="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:kursach.View" xmlns:viewmodel="clr-namespace:kursach.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:VMWarehouseMain}"
+        mc:Ignorable="d"
+        Title="Склад" Name="WarWnd" Height="450" Width="800"  WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Background="#41024D" >
+            <TextBlock Text="Прием товаров" HorizontalAlignment="Center" FontSize="20" Foreground="White" />
+        </StackPanel>
+        <Button Height="30" Command="{Binding ExitBtn}" CommandParameter="{Binding ElementName=WarWnd}" Width="30" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignIconButton}">
+            <Button.ToolTip>
+                <ToolTip Content="Выход" />
+            </Button.ToolTip>
+            <materialDesignIcons:PackIcon Kind="ArrowLeftBold" Foreground="LightGray" />
+        </Button>
+        <!-- Content -->
+        <Grid Grid.Row="1">
+            <!-- Side Menu -->
+            <DockPanel LastChildFill="True">
+                <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Center" Width="200" Background="LightGray" Orientation="Vertical">
+                    <Button Content="Принять" Margin="16 25 16 16" Command="{Binding AcceptProductCommand}"  />
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Right" Margin="16" Width="300"  >
+                    <ComboBox  MaxDropDownHeight="150" ItemsSource="{Binding Suppliers}" FontSize="16" DisplayMemberPath="Naming" SelectedItem="{Binding SelectedSupplier}" materialDesign:HintAssist.Hint="Выбор поставщика" />
+                    <TextBox Text="{Binding ResponsibleSurname}" FontSize="16" Margin="0 8" IsReadOnly="True" materialDesign:HintAssist.Hint="Фамилия ответственного за поставку"/>
+                    <ComboBox MaxDropDownHeight="150" ItemsSource="{Binding InventoryNumber}" FontSize="16" DisplayMemberPath="Inventorynumber" SelectedItem="{Binding SelectedNumber}" materialDesign:HintAssist.Hint="Инвентаризационный номер" />
+                    <TextBox Text="{Binding NewProductName}" Margin="0 8" FontSize="16" materialDesign:HintAssist.Hint="Название товара"/>
+                    <TextBox Text="{Binding Quantity}" Margin="0 8" FontSize="16" materialDesign:HintAssist.Hint="Количество"/>
+                </StackPanel>
+            </DockPanel>
+        </Grid>
+
+        <!-- Footer -->
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <TextBlock Text="© 2023 HouseM" Foreground="Gray" />
+        </StackPanel>
+    </Grid>
+</Window>

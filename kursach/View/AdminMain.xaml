@@ -1,0 +1,57 @@
+﻿<Window x:Class="kursach.View.AdminMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesignIcons="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:kursach.View" xmlns:viewmodel="clr-namespace:kursach.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:VMAdminMain}"
+        mc:Ignorable="d"
+        Title="Главное окно" Name="AdminWnd" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Background="#41024D" >
+            <TextBlock Text="Администрирование" HorizontalAlignment="Center" FontSize="20" Foreground="White" />
+        </StackPanel>
+        <Button Height="30" Command="{Binding ExitBtn}" CommandParameter="{Binding ElementName=AdminWnd}" Width="30" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignIconButton}">
+            <Button.ToolTip>
+                <ToolTip Content="Выход" />
+            </Button.ToolTip>
+            <materialDesignIcons:PackIcon Kind="ExitToApp" Foreground="LightGray" />
+        </Button>
+
+        <!-- Content -->
+        <Grid Grid.Row="1">
+            <!-- Side Menu -->
+            <DockPanel LastChildFill="True">
+                <StackPanel DockPanel.Dock="Top" Height="150" VerticalAlignment="Center" HorizontalAlignment="Center" Width="800" Background="LightGray" Orientation="Horizontal">
+                    <Button Content="Добавить сотрудника" Margin="10 25 10 10" FontSize="16" Command="{Binding AddEmployeeBtn}" CommandParameter="{Binding ElementName=AdminWnd}" />
+                    <Button Content="Редактировать сотр." Margin="10 25 10 10" FontSize="16" Command="{Binding EditEmployee}" CommandParameter="{Binding ElementName=AdminWnd}" />
+                    <Button Content="Добавить товар" Margin="10 25 10 10" FontSize="16" Command="{Binding AddProductBtn}" CommandParameter="{Binding ElementName=AdminWnd}" />
+                    <Button Content="Редактировать тов." Margin="10 25 10 10" FontSize="16" Command="{Binding EditProductBtn}" CommandParameter="{Binding ElementName=AdminWnd}" />
+                </StackPanel>
+            </DockPanel>
+        </Grid>
+
+        <!-- Footer -->
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <TextBlock Text="© 2023 HouseM" Foreground="Gray" />
+        </StackPanel>
+    </Grid>
+</Window>

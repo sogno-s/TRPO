@@ -1,0 +1,55 @@
+﻿<Window x:Class="kursach.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:kursach"
+        xmlns:local1="clr-namespace:kursach.Modules"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewmodel1="clr-namespace:kursach.ViewModel" 
+        xmlns:converters1="clr-namespace:kursach.Converter" 
+        d:DataContext="{d:DesignInstance Type=viewmodel1:Authorization}"
+        mc:Ignorable="d"
+        Title="Авторизация" Name="LoginWindow" Height="250" Width="450" WindowStartupLocation="CenterScreen" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <viewmodel1:Authorization x:Key="Authorization" />
+            <converters1:Converter x:Key="Converter"></converters1:Converter>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Content -->
+        <StackPanel Grid.Row="0" VerticalAlignment="Center" Margin="16">
+            <TextBox Text="{Binding PersonLogin}" materialDesign:HintAssist.Hint="Имя пользователя" Margin="0 0 0 8" FontSize="18" />
+            <PasswordBox Name="Pass" materialDesign:HintAssist.Hint="Пароль" Margin="0 0 0 8" FontSize="18" />
+
+            <Button Content="Войти" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="18"
+                    Command="{Binding LoginCommand}" Margin="0 16 0 0" >
+                <Button.CommandParameter>
+                    <MultiBinding Converter= "{StaticResource Converter}">
+                        <Binding ElementName="Pass"></Binding>
+                        <Binding ElementName="LoginWindow"></Binding>
+                    </MultiBinding>
+                </Button.CommandParameter>
+            </Button>
+        </StackPanel>
+        
+        <!-- Footer -->
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="© 2023 HouseM" Foreground="Gray" />
+        </StackPanel>
+    </Grid>
+</Window>

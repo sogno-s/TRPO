@@ -1,0 +1,94 @@
+﻿<Window x:Class="kursach.View.AdminAddProduct"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesignIcons="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:kursach.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewmodel="clr-namespace:kursach.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:VMAdminAddProduct}"
+        mc:Ignorable="d"
+        Title="Добавление товаров" Name="AddProd" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                <Setter Property="Margin" Value="0 8" />
+                <Setter Property="Width" Value="250" />
+            </Style>
+            <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
+                <Setter Property="Margin" Value="0 8" />
+                <Setter Property="Width" Value="250" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Background="#41024D" >
+            <TextBlock Text="Добавление продуктов" HorizontalAlignment="Center" FontSize="20" Foreground="White" />
+        </StackPanel>
+        <Button Height="30" Command="{Binding ExitBtn}" CommandParameter="{Binding ElementName=AddProd}" Width="30" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignIconButton}">
+            <Button.ToolTip>
+                <ToolTip Content="Выход" />
+            </Button.ToolTip>
+            <materialDesignIcons:PackIcon Kind="ArrowLeftBold" Foreground="LightGray" />
+        </Button>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Margin="16">
+                <StackPanel>
+                    <TextBlock Background="LightGray" Text="Категория" FontWeight="Bold" FontSize="18" Margin="0 16" />
+                    <ComboBox DisplayMemberPath="Namingcategory" FontSize="16" ItemsSource="{Binding CategoryName}" SelectedItem="{Binding SelectedCategory}" materialDesign:HintAssist.Hint="Выбрать существующую категорию" MaxDropDownHeight="150" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox FontSize="16" Margin="250 0 0 0" Text="{Binding NewCategoryName}" materialDesign:HintAssist.Hint="Добавить новую категорию" />
+                        <Button Height="30" Margin="10 0 0 0" Command="{Binding AddNewCategory}"  Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}">
+                            <Button.ToolTip>
+                                <ToolTip Content="Выход" />
+                            </Button.ToolTip>
+                            <materialDesignIcons:PackIcon Kind="Add" Foreground="DarkGreen" />
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock  Background="LightGray" Text="Номер на складе" FontWeight="Bold" FontSize="18" Margin="0 16" />
+                    <ComboBox DisplayMemberPath="Inventorynumber" FontSize="16" ItemsSource="{Binding InventoryNumbers}" SelectedItem="{Binding SelectedInventoryNumber}" materialDesign:HintAssist.Hint="Инвентаризационный номер" MaxDropDownHeight="150"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox FontSize="16" Margin="250 0 0 0" Text="{Binding NewNumberInventory}" materialDesign:HintAssist.Hint="Добавить новый номер" />
+                        <Button Height="30" Margin="10 0 0 0" Command="{Binding AddNewNumber}"  Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}">
+                            <Button.ToolTip>
+                                <ToolTip Content="Выход" />
+                            </Button.ToolTip>
+                            <materialDesignIcons:PackIcon Kind="Add" Foreground="DarkGreen" />
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock  Background="LightGray" Text="Информация" FontWeight="Bold" FontSize="16" Margin="0 16" />
+                    <TextBox FontSize="16" Text="{Binding ProductName}" materialDesign:HintAssist.Hint="Название" />
+                    <TextBox FontSize="16" Text="{Binding Manufacturer}" materialDesign:HintAssist.Hint="Произдодитель" />
+                    <TextBox FontSize="16" Text="{Binding Price}" materialDesign:HintAssist.Hint="Цена" />
+                    <TextBox FontSize="16" Text="{Binding Description}" materialDesign:HintAssist.Hint="Описание" />
+                </StackPanel>
+
+                <Button Content="Добавить" Command="{Binding AddProductCommand}"  Margin="0 16" />
+                <!-- Footer -->
+                <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <TextBlock Text="© 2023 HouseM" Foreground="Gray" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

@@ -1,0 +1,143 @@
+﻿<Window x:Class="kursach.View.AdminAddEmployee"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"        
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesignIcons="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:kursach.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewmodel="clr-namespace:kursach.ViewModel" 
+        xmlns:controls1="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        xmlns:local1="clr-namespace:kursach.Modules" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:VMAdminAddEmployee}"
+        mc:Ignorable="d"
+        Title="Регистрация сотрудника" Name="AddEmployeeWnd" Height="450" Width="800"  WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                <Setter Property="Margin" Value="0 8" />
+                <Setter Property="Width" Value="250" />
+            </Style>
+            <Style TargetType="DatePicker" BasedOn="{StaticResource MaterialDesignDatePicker}">
+                <Setter Property="Margin" Value="0 8" />
+                <Setter Property="Width" Value="250" />
+            </Style>
+            <Style TargetType="xctk:MaskedTextBox">
+                <Setter Property="Foreground" Value="{StaticResource MaterialDesignBody}" />
+                <Setter Property="BorderBrush" Value="{StaticResource MaterialDesignDivider}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Padding" Value="8" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="xctk:MaskedTextBox">
+                            <Grid>
+                                <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="2">
+                                    <Grid>
+                                        <ScrollViewer x:Name="PART_ContentHost"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Center"
+                                          Padding="{TemplateBinding Padding}" />
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <!-- Header -->
+        <StackPanel  Background="#41024D" Height="30" VerticalAlignment="Top">
+            <TextBlock Text="Добавление сотрудника" HorizontalAlignment="Center" FontSize="20" Foreground="White" />
+        </StackPanel>
+        <Button Grid.Row="0" Height="30" Command="{Binding ExitBtn}" CommandParameter="{Binding ElementName=AddEmployeeWnd}" Width="30" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource MaterialDesignIconButton}">
+            <Button.ToolTip>
+                <ToolTip Content="Выход" />
+            </Button.ToolTip>
+            <materialDesignIcons:PackIcon Kind="ArrowLeftBold" Foreground="LightGray" />
+        </Button>
+
+        <ScrollViewer Margin="0,30,0,0" VerticalScrollBarVisibility="Auto">
+            <Grid Margin="16" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" >
+                    <TextBlock  Background="LightGray" Text="Паспорт" FontWeight="Bold" FontSize="18" Margin="0 16" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox  PreviewTextInput="TextBox_PreviewTextInput" MaxLength="4" FontSize="16" Text="{Binding PassportSeries}" materialDesign:HintAssist.Hint="Серия" />
+                        <TextBox PreviewTextInput="TextBox_PreviewTextInput1" MaxLength="6" FontSize="16" Text="{Binding PassportNumber}" materialDesign:HintAssist.Hint="Номер" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" >
+                    <TextBlock  Background="LightGray" Text="Личные данные" FontWeight="Bold" FontSize="16" Margin="0 16" />
+                    <TextBox PreviewTextInput="TextBox_PreviewTextInput_Surname" FontSize="16" Text="{Binding LastName}" materialDesign:HintAssist.Hint="Фамилия" />
+                    <TextBox PreviewTextInput="TextBox_PreviewTextInput_Surname" FontSize="16" Text="{Binding FirstName}" materialDesign:HintAssist.Hint="Имя" />
+                    <TextBox PreviewTextInput="TextBox_PreviewTextInput_Surname" FontSize="16" Text="{Binding MiddleName}" materialDesign:HintAssist.Hint="Отчество" />
+                    <DatePicker FontSize="16" SelectedDate="{Binding DateOfBirth}" materialDesign:HintAssist.Hint="Дата рождения" />
+                    <xctk:MaskedTextBox HorizontalAlignment="Center" FontSize="16" Text="{Binding PhoneNumber}" materialDesign:HintAssist.Hint="Номер телефона"
+                    Mask="8 (000) 000 0000" Width="247" />
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <TextBox PreviewTextInput="TextBox_PreviewTextInput_Email" FontSize="16" materialDesign:HintAssist.Hint="Email">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                                    <Setter Property="Margin" Value="0 8" />
+                                    <Setter Property="Width" Value="250" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Email, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" Value="True">
+                                            <Setter Property="Validation.ErrorTemplate">
+                                                <Setter.Value>
+                                                    <ControlTemplate>
+                                                        <DockPanel LastChildFill="True">
+                                                            <Border Background="Red" DockPanel.Dock="Right" Width="10" />
+                                                            <AdornedElementPlaceholder />
+                                                        </DockPanel>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                            <TextBox.Text>
+                                <Binding Path="Email" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <local1:EmailValidationRule ErrorMessage="Неправильный формат email" />
+                                        <local1:MaxLengthValidationRule MaxLength="20" ErrorMessage="Email должен быть не более 20 символов" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <TextBox PreviewTextInput="TextBox_PreviewTextInput_Email" FontSize="16" Text="{Binding Specialization}" materialDesign:HintAssist.Hint="Название специализации" />
+                    <TextBox FontSize="16" PreviewTextInput="TextBox_PreviewTextInput_Login" Text="{Binding Login}" materialDesign:HintAssist.Hint="Логин" />
+                    <TextBox FontSize="16" PreviewTextInput="TextBox_PreviewTextInput_Login" Text="{Binding Password}" materialDesign:HintAssist.Hint="Пароль" />
+
+                <Button Grid.Row="2" FontSize="16" Content="Добавить" Command="{Binding AddEmployeeCommand}" Margin="0 16" />
+                    <!-- Footer -->
+                    <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <TextBlock Text="© 2023 HouseM" Foreground="Gray" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>

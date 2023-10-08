@@ -1,0 +1,58 @@
+﻿<Window x:Class="kursach.Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:kursach"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesignIcons="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesignConverters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf" 
+        xmlns:viewmodel="clr-namespace:kursach.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:VMMain}"
+        Title="Главное окно" Name="WndMain" Height="480" Width="850" WindowStartupLocation="CenterScreen" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Lime" SecondaryColor="Lime" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Background="#41024D" >
+            <TextBlock Text="Система автоматизации торговцев мебелью" HorizontalAlignment="Center" FontSize="20" Foreground="White" />
+        </StackPanel>
+        <Button Height="30" Command="{Binding ExitBtn}" CommandParameter="{Binding ElementName=WndMain}" Width="30" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignIconButton}">
+            <Button.ToolTip>
+                <ToolTip Content="Выход" />
+            </Button.ToolTip>
+            <materialDesignIcons:PackIcon Kind="ExitToApp" Foreground="LightGray" />
+        </Button>
+
+        <!-- Content -->
+        <Grid Grid.Row="1">
+            <!-- Side Menu -->
+            <DockPanel LastChildFill="True">
+                <StackPanel DockPanel.Dock="Top" VerticalAlignment="Center"  HorizontalAlignment="Center" Width="850" Background="LightGray" Orientation="Vertical">
+                    <Button Content="Товары" Margin="20 25 16 16" Width="200" FontSize="18" Command="{Binding ProductBtn}" CommandParameter="{Binding ElementName=WndMain}" />
+                    <Button Content="Отчеты" Margin="20 25 16 16" Width="200" FontSize="18" Command="{Binding ReportBtn}" CommandParameter="{Binding ElementName=WndMain}"/>
+                </StackPanel>
+            </DockPanel>
+        </Grid>
+
+        <!-- Footer -->
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <TextBlock Text="© 2023 HouseM" Foreground="Gray" />
+        </StackPanel>
+    </Grid>
+</Window>
